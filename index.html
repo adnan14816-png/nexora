@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEXORA — AI Systems</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#050507;color:#f5f5f2;font-family:Inter,Arial,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;background:radial-gradient(circle at 50% 20%,transparent 0 35%,rgba(0,0,0,.42) 100%)}
+canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+nav{position:fixed;top:0;left:0;right:0;height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;z-index:30;mix-blend-mode:screen}
+.logo{font-size:18px;letter-spacing:.35em;font-weight:800}.navbtn{border:1px solid #ffffff25;background:#ffffff09;padding:11px 18px;border-radius:30px;color:white;text-decoration:none;font-size:12px;backdrop-filter:blur(12px)}
+.scene{height:100vh;position:relative;z-index:2;display:grid;place-items:center;overflow:hidden}
+.hero{perspective:900px;text-align:center}
+.kicker{font-size:11px;letter-spacing:.45em;opacity:.55;margin-bottom:25px}
+.hero h1{font-size:clamp(60px,13vw,190px);line-height:.78;margin:0;font-weight:900;letter-spacing:-.07em;text-transform:uppercase;transform-style:preserve-3d;text-shadow:0 0 60px #fff1}
+.hero h1 span{display:block;transition:transform .15s linear,opacity .15s linear}
+.hero h1 .one{transform:translateZ(80px)}.hero h1 .two{transform:translateZ(-20px)}.hero h1 .three{transform:translateZ(-100px)}
+.sub{margin:38px auto 0;max-width:540px;font-size:14px;line-height:1.7;color:#aaa}.scroll{position:absolute;bottom:30px;font-size:10px;letter-spacing:.3em;opacity:.45}
+.statement{display:block;width:100%;padding:0 7vw}.statement h2{font-size:clamp(45px,9vw,130px);line-height:.88;letter-spacing:-.06em;margin:0;text-transform:uppercase}
+.statement h2 span{display:block;opacity:.15;transform:translateX(0);transition:.3s}.statement h2 span.active{opacity:1}
+.modules{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;width:86%;max-width:1250px}.module{height:360px;border:1px solid #ffffff16;padding:35px;position:relative;background:linear-gradient(145deg,#ffffff09,#ffffff01);overflow:hidden;transform-style:preserve-3d;transition:.5s}.module:hover{transform:rotateX(6deg) rotateY(-7deg) translateY(-12px);border-color:#fff5}.num{font-size:11px;opacity:.35}.module h3{font-size:30px;letter-spacing:-.04em;margin-top:120px}.module p{font-size:12px;color:#999;line-height:1.7}.module i{position:absolute;width:100px;height:100px;border:1px solid #ffffff25;border-radius:50%;right:-20px;top:-20px}.module i:after{content:"";position:absolute;inset:18px;border:1px solid #ffffff15;border-radius:50%}
+.cta{text-align:center}.cta h2{font-size:clamp(50px,10vw,150px);letter-spacing:-.08em;line-height:.8;margin:0 0 50px}.cta a{display:inline-block;color:#050507;background:#f5f5f2;padding:18px 30px;border-radius:40px;text-decoration:none;font-size:12px;font-weight:800;letter-spacing:.15em}
+@media(max-width:700px){nav{padding:0 5vw}.modules{grid-template-columns:1fr;width:90%}.module{height:280px}.module h3{margin-top:70px}.hero h1{font-size:20vw}}
+</style>
+</head>
+<body>
+<canvas id="space"></canvas>
+<nav><div class="logo">NEXORA</div><a class="navbtn" href="#contact">START A PROJECT</a></nav>
+
+<section class="scene" id="hero">
+<div class="hero" id="heroText">
+<div class="kicker">AI SYSTEMS / AUTOMATION / GROWTH</div>
+<h1><span class="one">BUILD</span><span class="two">THE</span><span class="three">SYSTEM.</span></h1>
+<div class="sub">We design intelligent systems that turn repetitive work into automated growth.</div>
+</div><div class="scroll">SCROLL TO ENTER →</div>
+</section>
+
+<section class="scene">
+<div class="statement">
+<h2><span>Not more</span><span>people.</span><span>Better</span><span>systems.</span></h2>
+</div>
+</section>
+
+<section class="scene">
+<div class="modules">
+<div class="module"><span class="num">01 / AI AGENTS</span><i></i><h3>Agents</h3><p>AI workers that qualify leads, answer questions and execute workflows.</p></div>
+<div class="module"><span class="num">02 / AUTOMATION</span><i></i><h3>Automation</h3><p>Connect WhatsApp, CRM, forms and internal operations into one system.</p></div>
+<div class="module"><span class="num">03 / GROWTH</span><i></i><h3>Growth</h3><p>Build systems that capture demand, follow up faster and reduce manual work.</p></div>
+</div>
+</section>
+
+<section class="scene" id="contact">
+<div class="cta"><div class="kicker">THE NEXT SYSTEM STARTS HERE</div><h2>MAKE<br>WORK<br>FLOW.</h2><a href="mailto:hello@nexora.ai">BUILD WITH NEXORA</a></div>
+</section>
+
+<script>
+const c=document.getElementById('space'),x=c.getContext('2d');let w,h,dpr,stars=[];
+function resize(){dpr=Math.min(devicePixelRatio,2);w=innerWidth;h=innerHeight;c.width=w*dpr;c.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0);stars=Array.from({length:170},()=>({x:Math.random()*w,y:Math.random()*h,z:Math.random()*1+.15,s:Math.random()*1.8+.2}))}
+resize();addEventListener('resize',resize);
+let mx=0,my=0,sy=0;addEventListener('pointermove',e=>{mx=(e.clientX/w-.5)*2;my=(e.clientY/h-.5)*2});addEventListener('scroll',()=>sy=scrollY);
+function draw(){x.clearRect(0,0,w,h);let t=performance.now()/1000;for(const p of stars){let px=p.x+(mx*18*p.z)+Math.sin(t*.25+p.y)*4,py=p.y+(my*18*p.z);x.globalAlpha=.12+.35*p.z;x.beginPath();x.arc((px+w)%w,(py+h)%h,p.s*p.z,0,7);x.fill()}requestAnimationFrame(draw)}draw();
+
+const hero=document.getElementById('heroText');addEventListener('scroll',()=>{let q=Math.min(scrollY/innerHeight,1);hero.style.transform=`translate3d(${mx*-30*q}px,${-120*q}px,${180*q}px) rotateX(${my*3}deg)`;hero.style.opacity=1-q*.9});
+const spans=document.querySelectorAll('.statement span');const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('active')),{threshold:.55});spans.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
